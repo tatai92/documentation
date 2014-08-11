@@ -1,0 +1,7 @@
+mettre a jour son drupal : update.php 
+taxonomie: tag
+Possibilité d associer des articles à un tag.
+add term : associer des termes à un tag
+manage fields: ajouter des champs à un tag. Ces champs devront être renseigné dans chacun des termes.
+
+

@@ -1,0 +1,349 @@
+alias php="c:/php/php.exe"
+
+pas besoin de \ pour les use, on prend automatiquement le chemin absolu
+ use A\B\C\D\E\F\MaClasse;
+    $a = new MaClasse;
+
+	use A\B\C\D\E\F\MaClasse as Hello;
+    $a = new Hello; // 
+	
+pour les chemins des routes on prend le premier de routin.yml
+pour les chemins des routes dans un meme bundle on prend le premier qui match 
+pour les noms des routes on prend le premier que l on trouve (redirect)
+
+return new Response =>  on ne prend pas en compte @template (twig)
+
+config_dev(prod ou test) importe config puis le surcharge
+parameters.yml => paramètres
+ bridge)> info que 'on ne met pas dans le bundle
+
+parameters.yml -> ne pas versionner, ne mettre que les choses qui change d unenvironnement a l autre
+
+mode dev=> a chaque changement on vide le cache
+
+app/console cache:clear --env=prod vide le cache en prod
+app/console cache:clear  en dev
+
+routin.yml->prefix:  préfixe commun a tous les controller du bundle
+Use $this to refer to the current object. Use self to refer to the current class. In other words, use $this->member for non-static members, use self::$member for static members
+call_user_func
+
+formulaire
+
+type : text/password/ ensemble de type
+
+handlerequest() véirifie la data, si c ok, met dans l'objet
+ne pas mettre le fin de php ?>
+
+config_dev.yml
+	=> disable_delivary: true // desactive lenvoi des mail
+	=> delivery_address: toto@toto.fr // envoi tous les mails a cet adresse
+
+interface: Ne peut pas etre instancier.aucune méthode n'est implémentée.Elles sont juste déclarées. Toutes les classes qui en héritent devront implémenter(définir) toutes les méthodes déclarées dans l'interface (possibilité d'en ajouter(
+Classe abstraite: Ne peut pas etre instancier.Certaines méthodes n'ont pas été implémentée.Il y en donc qui sont déclarées et d'autre implémenter. Toutes les classes qui en héritent devront implémenter(définir) toutes les méthodes non implémentée 'juste déclarées) dans la classe abstraite(possibilité d'en ajouter)
+
+Un membre d'une classe peut être :
+
+    lié à la classe => static
+    lié à l'instance => pas de mot clé
+static, self :: => uniquement pour les classes
+this uniquement pour objets
+
+echo self::$bar; ignore toutes les classes étendues, on prend la valeur de bar dans la classe ou on a ecrit self
+echo static::$bar; prend en compte la classe etendu, on prend la valeur de la classe qui a appelé la methode qui utilise static;;bar
+
+const 
+ne peut etre modifié mais peut etre redéfini dans une classe heritire
+est obligatoirement public
+
+static
+peut etre modifié
+peut etre public protected,private
+peut etre avec fonction
+on peut acceder a tout ce qui est static via nomclasse::mamethodstatic (ou attribut) sans instancier la classe 
+
+http://www.programmerinterview.com/index.php/php-questions/php-self-vs-static/
+
+il y a association lorsqu'une classe A se sert d'une classe B.
+
+Une agrégation est une association particulière : il y a agrégation entre A et B si l'objet A possède une ou plusieurs instances de B (un attribut a est une instance de B).
+
+Une composition est une agrégation particulière : il y a composition entre A et B si toutes les instances de B contenues dans A sont supprimées lorsque A est supprimée.
+
+association is a relationship where all objects have their own lifecycle and there is no owner. Let’s take an example of Teacher and Student. Multiple students can associate with single teacher and single student can associate with multiple teachers but there is no ownership between the objects and both have their own lifecycle. Both can create and delete independently.
+
+Aggregation is a specialised form of Association where all objects have their own lifecycle but there is ownership and child objects can not belong to another parent object. Let’s take an example of Department and teacher. A single teacher can not belong to multiple departments, but if we delete the department teacher object will not be destroyed. We can think about it as a “has-a” relationship.
+
+Composition is again specialised form of Aggregation and we can call this as a “death” relationship. It is a strong type of Aggregation. Child object does not have it's lifecycle and if parent object is deleted all child objects will also be deleted. Let’s take again an example of relationship between House and rooms. House can contain multiple rooms there is no independent life of room and any room can not belong to two different houses. If we delete the house - room will automatically be deleted. Let’s take another example relationship between Questions and options. Single questions can have multiple options and option can not belong to multiple questions. If we delete questions options will automatically be deleted.
+
+
+supprmer un bunndle : supprimer le répertoire du bundle
+appkernel
+routing.yml
+
+
+
+ispassword doit commencer par is
+errormapping on ne met pas le is
+addEventListener
+callback=> permet de mettre lerreur juste a coté du champs en question (error_mapping aussi), et de mettre des message de violation
+
+modifier getname du type user
+php app/console doctrine:generate:entity => creer la classe
+SensioTrainingBundle:user
+php app/console doctrine:generate:entities SensioTrainingBundle:User => met a jour la classe
+php app/console generate:doctrine:form SensioTrainingBundle:User
+ php app/console doctrine:database:create
+php app/console doctrine:schema:up --force
+php app/console doctrine:schema:update --dump-sql
+
+
+injection de dependance : donner des dépendance via construceur,mdethode,attirubt...
+
+service container : gerer les dependance et services
+
+app/console container:debug**servuce ; objet gerer ar le container
+
+interface (contrat),cd...
+dependance
+
+$this->get('sensio_hangman.game_context')
+
+public="false" utilisable que par le container
+
+php app/console config:dump sensio_hangman
+
+tes unitaire
+
+sufffix class =>Test
+préfix fmethde test 
+
+php phpunit-lts.phar
+ php phpunit-lts.phar -c app
+phpunit --coverage-html coverage
+
+casper.js
+
+$ php phpunit-lts.phar -c app --coverage-htm C:\toto.html
+
+container initialise objet une seule fois et seulement des la pemiere utilsiation
+
+@dataProvider execute la fonction avec toutes les données de @dataProvider
+
+composer gere les dependances
+fait autoloader
+
+
+site: composer, packagist
+
+security
+authentification et authorasaiion
+
+$salt
+
+plaintext
+sha512 (5000 iterations)
+
+1million caractre nirva
+
+memory : met le mdp (en clair ou crypte) dans security.yml
+login_path doit etre en dehours de la zone de securité
+
+voteur : gestionn d edition de commentaire
+
+signin se connecter != signup s enregistrer
+
+
+toujour mettre un notblank quand on rajouter des condittions
+la vue doit se placer dans un repertoire avec le nom du controller et doit se nommer comme la fonction
+
+varnish
+
+activer cache avec smfony: 	=>config.yml decommenter esi
+				=>app_dev
+				require_once __DIR__.'/../app/AppCache.php'; 
+				$kernel= new AppCache($kernel);
+				=> twig render_esi()
+				=> controller $response->setSharedMaxAge(10);
+
+activer cache avec varnish     pas besoin de 	require_once __DIR__.'/../app/AppCache.php';
+						$kernel= new AppCache($kernel);
+
+
+    _controller: Comme vous l'avez vu, ce paramètre est utilisé pour déterminer quel contrôleur est exécuté lorsque l'URL est reconnue ;
+    _format: Utilisé pour définir le format de la requête(en savoir plus) ;
+    _locale: Utilisé pour définir la locale de la session (en savoir plus).
+
+
+depuis le controler
+$this->generateUrl('sdzblog_voir', array('id' => $id)); // recupere le chemin relatif (en fonction du nom du controler)
+$this->generateUrl('sdzblog_voir', array('id' => $id),true); // recupere le chemin absolu (en fonction du nom du controler)
+ return $this->redirect($url); // redirection
+return $this->render('SdzBlogBundle:Blog:index.html.twig',array('nom' => $page)); // redirige vers le template (en fonction du nom du template)
+
+depuis le template
+a href="{{ path('sdzblog_voir', { 'id': article_id }) }}"> // chemin relatif
+a href="{{ url('sdzblog_voir', { 'id': article_id }) }}"> // chemin absolu
+{{ render(controller("SdzBlogBundle:Blog:menu")) }} // inclusion de controller
+
+
+
+services
+this->get('nom_du_service')
+
+$session = $this->get('session'); // $session = $request->getSession(); 
+$user_id = $session->get('user_id');
+$session->set('user_id', 91);
+
+throw $this->createNotFoundException('Page inexistante (page = '.$page.')');
+
+
+Le rôle du contrôleur est de retourner un objet Response : ceci est obligatoire !
+
+
+twig
+
+    {{ … }}affiche quelque chose ;
+
+    {% … %}fait quelque chose ;
+
+    {# … #} n'affiche rien et ne fait rien : c'est la syntaxe pour les commentaires, qui peuvent être sur plusieurs lignes.
+
+	asset() : domaine...
+fonction {{ asset() }} de Twig, qui va chercher vos ressources dans le répertoire /web
+
+composer install script also copies the parameters.yml.dist file contents into the parameters.yml file,
+e nom de vos services par « nomApplication_nomBundle ». Pour notre bundle Sdz\BlogBundle, on a donc préfixé notre service de « sdz_blog. ».
+
+Récuperer le service (classe)
+$this->container->get('sdz_blog.antispam')  //ok
+recuperer un parametre (declarer dans le service.xml ou bien directement dans le parameters.yml
+$this->get('sdz_blog.antispam');  //ok
+$this->container->getParameter('toto')  //ok
+$this->getParameter('toto')  //KO
+
+$article2 = $em->getRepository('SdzBlogBundle:Article')->find(5);
+
+// On modifie cet article, en changeant la date à la date d'aujourd'hui
+$article2->setDate(new \Datetime());
+
+'injecter un service dans un autre. Ce mécanisme s'appelle l'injection de dépendances (dependency injection en anglais).
+Un service est une simple classe associée à une certaine configuration.
+
+pas besoin de faire un persist() sur $article2. En effet, comme on a récupéré cet article via Doctrine,
+// il sait déjà qu'il doit gérer cette entité. Rappelez-vous, un persist ne sert qu'à donner la responsabilité de l'objet à Doctrine.
+
+L'EntityManager sert à manipuler les entités, tandis que les repositories servent à récupérer les entités.
+
+@ORM\JoinColumn(nullable=false) // forcer une relation
+
+2/ L'attribut imagene contient pas l'id de l'Image liée, il contient une instance de la classe Sdz\BlogBundle\Entity\Image qui, elle, contient un attribut id.
+
+// Pour cette relation pas de cascade, car elle est définie dans l'entité Commentaire et non Article
+    // On doit donc tout persister à la main ici
+
+Sachez qu'il est tout de même possible de ne sélectionner qu'une partie d'un objet, en faisant « a.titre » par exemple. Mais vous ne recevez alors qu'un tableau contenant les attributs sélectionnés, et non un objet. Vous ne pouvez donc pas modifier/supprimer/etc. l'objet, puisque c'est un tableau. Cela sert dans des requêtes particulières, mais la plupart du temps on sélectionnera bien tout l'objet.
+
+php app/console doctrine:query:dql "SELECT a FROM SdzBlogBundle:Article a"
+
+Si vous utilisez une entité dont vous avez récupéré les entités liées avec une jointure, vous pouvez alors utiliser les getters joyeusement sans craindre de requête supplémentaire
+findAll récupèrent ne fait aucune jointure, elle fait juste un select * de la table.
+la jointure permet de charger l'entité lié. Ainsi doctrine ne cherchera plus dans la base de données
+Doctrine récupere les info de la bdd seulement si besoin.
+
+En informatique, une fonction de rappel (callback en anglais) ou fonction de post-traitement est une fonction qui est passée en argument à une autre fonction. Cette dernière peut alors faire usage de cette fonction de rappel comme de n'importe quelle autre fonction, alors qu'elle ne la connaît pas par avance.
+
+evenement doctrine :Ils ne sont pas déclenchés lorsque vous effectuez des requêtes DQL ou avec le QueryBuilder.
+PrePersist avant persist (des entité qui viennent d etre crée)
+PostPersist apres flush (des entité qui viennent d etre crée)
+preUpdate avant flush d un update
+PreRemove avant flush d un remove
+PostLoad se produit juste après que l'EntityManager a chargé une entité (ou après un $em->refresh()). 
+
+* @Gedmo\Slug(fields={"titre","auteur"}) fait un slug des 3 concatene
+
+la variable $articles contient une instance de Paginator. Concrètement, c'est une liste d'articles, dans notre cas une liste de 3 articles (on a mis cette valeur en dur). Vous pouvez l'utiliser avec un simple foreach par exemple. Cependant, pour obtenir le nombre de pages vous voyez qu'on a utilisé un count($articles) : ce count ne retourne pas 3, mais le nombre total d'articles dans la base de données ! 
+
+Il faut toujours vérifier que la vue incluse aura les variables qu'elle attend. Ici, la vue article.html.twig utilise la variable {{ article }}, il faut donc :
+
+    Que cette variable existe dans la vue qui l'inclut ;
+
+    Ou que la vue qui l'inclut précise cette variable dans le tableau : {{ include "…" with {'article': … } }}.
+	
+paramconverters
+
+    Utiliser le slug plutôt que l'id pour les liens vers les articles, histoire d'avoir un meilleur référencement ;
+
+    Utiliser un bundle de Markdown pour mettre en forme le texte du contenu de l'article ;
+
+    Utiliser les microdata pour améliorer la compréhension de votre page par les moteurs de recherche, notamment avec le format Article.
+
+url courante : {{app.request.uri }}
+
+
+Pour le nom du controller : app.request.attributes.get('_controller')
+
+Pour le nom de la route : app.request.attributes.get('_route') 
+
+closure
+function(type_du_parametre $parametre) use($parametre_du_parametre) {
+  return $parametre->methode($parametre_du_parametre);	
+
+
+'query_builder' => function(\Sdz\Bundle\BlogBundle\Entity\CategorieRepository $r) use($listCategories) {
+  return $r->getSelectedCategories($listCategories);
+
+
+}
+
+le seul moyen d'acceder a doctrine( n importe quel service??) est de passer par le controler, le repository ou bien un service
+
+3 scopes possible pour un service:
+- container par defaut (un seul)
+- request 'un par request different)
+- prototipe: se charge a chaque appel du service
+
+Si votre validateur possède des dépendances, comme une connexion à une base de données, il faudra le configurer comme un service dans le conteneur d'injection de dépendances. Ce service doit inclure le tag validator.constraint_validator et un attribut alias :
+
+FIREWALL : verifie qi il y a besoin de sautthentifier(se connecter) pour acceder a la page
+l'acces control vérifie qu on a le bon role	
+
+    Un utilisateur veut accéder à une ressource protégée ;
+
+    Le firewall redirige l'utilisateur au formulaire de connexion ;
+
+    L'utilisateur soumet ses informations d'identification (par exemple login et mot de passe) ;
+
+    Le firewall authentifie l'utilisateur ;
+
+    L'utilisateur authentifié renvoie la requête initiale ;
+
+    Le contrôle d'accès vérifie les droits de l'utilisateur, et autorise ou non l'accès à la ressource protégée.
+
+fos user (et autres bundle)
+Pour surcharger les vues  il suffit de créer une vue avec le meme nom dans notre bundle (faire un extend dans la vue)
+Pour surcharger controler, crer le meme fichier avec un extend (et un parent::)
+Surcharger des contrôleurs de cette façon fonctionne uniquement si le bundle réfère au contrôleur en utilisant la syntaxe standard FOSUserBundle:Registration:register dans les routes et templates. Ceci est la bonne pratique.
+Surcharger des ressources (vue route validation..)fonctionne uniquement lorsque vous référez à des ressources via la méthode @FosUserBundle/Resources/config/routing/security.xml. Si vous référez à des ressources sans utiliser le raccourci @NomDuBundle, ces dernières ne peuvent alors pas être surchargées.
+
+Pour surcharger un type de formulaire, il faut l'enregistrer comme service (c'est-à-dire que vous devez le tagger avec « form.type »).
+ Vous pourrez alors le surchargez comme vous surchargeriez n'importe quel service, comme c'est expliqué dans Services & Configuration. 
+Bien sûr, cela ne fonctionnera que si le type est appelé par son alias, et non pas s'il est instancié. Exemple:
+
+$builder->add('name', 'custom_type');
+$builder->add('name', new CustomType());
+
+surcharger un service 
+dependencyInjection/Compiler/OverrideServiceCompilerPass.php voir doc
+
+La méthode getName() retourne un identifiant qui devrait être unique dans votre application.
+
+Pour fosuser: (et peut etre pour les autres aussi)
+The tag must have a name value of form.type and an alias value that is the equal to the string returned from the getName method of your form type class. 
+
+On a ajouté l'attribut alias dans le tag, qui représente le nom sous lequel on pourra utiliser ce nouveau type. 
+Pour l'utiliser, c'est très simple, modifiez vos formulaires pour utiliser ckeditor à la place de textarea. 
+
+// obtenir respectivement des variables GET et POST
+$request->query->get('foo');
+$request->request->get('bar', 'valeur par défaut si bar est inexistant');

@@ -1,0 +1,7 @@
+PhpMyadmin allownopassord a changer dans le etc/phpadmin
+rm -r
+mv rename directory or file
+nano edit file
+su - root
+chmod -R 777 nomdurep
+apache2ctl -M affiche tous les modules activées
