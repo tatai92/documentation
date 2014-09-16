@@ -7,3 +7,5 @@ nano edit file
 su - root
 chmod -R 777 nomdurep
 apache2ctl -M affiche tous les modules activées
+vim /etc/network/interfaces Voir ou modifier l'ip de la vm
+reboot redemarrder  lavm
