@@ -9,3 +9,14 @@ chmod -R 777 nomdurep
 apache2ctl -M affiche tous les modules activées
 vim /etc/network/interfaces Voir ou modifier l'ip de la vm
 reboot redemarrder  lavm
+
+Augmenter la taille max des fichier uploadés:
+php.ini: upload_max_filesize
+php.ini: post_max_size
+ngnix.conf:
+ http {
+    client_max_body_size 100M;
+    [...]
+}
+redemarrer ngnix et php
+
